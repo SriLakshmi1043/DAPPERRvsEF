@@ -39,5 +39,11 @@ namespace Dapper.API.Controllers
         {
             return Ok(await _bookRepository.GetDiscount(BookName));
         }
+        [HttpPut( Name = "UpdateDiscount")]
+        public async Task<ActionResult> UpdateDiscount(OfferBooks coupon)
+        {
+            return Ok(await _bookRepository.UpdateDiscount(coupon));
+        }
+
     }
 }

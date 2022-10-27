@@ -27,6 +27,12 @@ namespace EF.API.Controllers
             return discount;
         }
 
+        [HttpPut(Name ="UpdateDiscount")]
+        public async Task<bool> UpdateDiscount(Offer coupon)
+        {
+            return await _iefRepository.UpdateDiscount(coupon); 
+        }
+
         [HttpDelete("{Id}", Name = "DeleteDiscount")]
         [ProducesResponseType(typeof(Offer), (int)HttpStatusCode.OK)]
         public async Task<ActionResult> DeleteDiscount(int Id)

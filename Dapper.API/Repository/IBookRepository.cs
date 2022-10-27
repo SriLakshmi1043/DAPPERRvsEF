@@ -8,5 +8,6 @@ namespace Dapper.API.Repository
         Task<bool> CreateDiscount(OfferBooks coupon);
         
         Task<bool> DeleteDiscount(int Id);
+        Task<bool> UpdateDiscount(OfferBooks coupon);
     }
 }

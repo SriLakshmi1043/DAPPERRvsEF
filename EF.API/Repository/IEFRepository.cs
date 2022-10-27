@@ -8,5 +8,6 @@ namespace EF.API.Repository
         Task<int> CreateDiscount(Offer coupon);
         
         Task<bool> DeleteDiscount(int Id);
+        Task<bool> UpdateDiscount(Offer coupon);
     }
 }

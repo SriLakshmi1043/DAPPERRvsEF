@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EF.API.Repository
 {
-    public class EFRepository :IEFRepository
+    public class EFRepository : IEFRepository
     {
         private readonly BooksDBContext _dbContext;
 
@@ -22,8 +22,15 @@ namespace EF.API.Repository
 
             return discount;
 
-
-            
+        }
+        public async Task<bool> UpdateDiscount(Offer coupon)
+        {
+           var discount = await _dbContext.Database.ExecuteSqlInterpolatedAsync($"exec UpdateBooks @Id ={coupon.Id}, @Amount ={coupon.Amount} ,@BookName={coupon.BookName},@Description={coupon.Description}");
+            if (discount == 0)
+            {
+                return false;
+            }
+            return true;
         }
 
         public async Task<bool> DeleteDiscount(int Id)

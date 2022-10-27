@@ -32,6 +32,19 @@ namespace Dapper.API.Repository
 
         }
 
+        public async Task<bool> UpdateDiscount(OfferBooks coupon)
+        {
+            using var connection = new SqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
+            var affected = await connection.ExecuteAsync("UpdateBooks", new { coupon.Id, coupon.BookName, coupon.Amount, coupon.Description }
+            , commandType: CommandType.StoredProcedure);
+
+            if (affected == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public async Task<bool> DeleteDiscount(int Id)
         {
             using var connection = new SqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
@@ -58,9 +71,3 @@ namespace Dapper.API.Repository
         }
     }
 }
-/*  var affected = await connection.ExecuteAsync
-                  ("DELETE FROM Offer   WHERE BookName=@BookName",
-                  new { BookName = BookName });*/
-/*  var affected = await connection.ExecuteAsync
-                  ("DELETE FROM Offer   WHERE BookName=@BookName",
-                  new { BookName = BookName });*/
